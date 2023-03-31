@@ -1,6 +1,8 @@
-import { HttpErrorResponse, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { saveAs as importedSaveAs } from 'file-saver';
 import { DataTransferService } from '../dataTransfer/data-transfer.service';
+import { Observable } from 'rxjs/';
 
 @Component({
   selector: 'app-files',
@@ -9,35 +11,46 @@ import { DataTransferService } from '../dataTransfer/data-transfer.service';
 })
 export class FilesComponent {
 
+  fileName: string = '';
+  fileTypes: string[] = [];
+  fileUploaded: boolean = false;
+  errorMessage: string = '';
+
+
   constructor(private dataTransfer: DataTransferService) { }
 
-  fileTypes: string[] = [];
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.fileName = file.name;
+      const formData = new FormData();
+      formData.append("file", file);
 
 
-  onUploadFile(file: File): void {
-    const formData = new FormData();
-    formData.append('file', file, file.name);
-    this.dataTransfer.upload(formData).subscribe(
-      event => {
-        console.log(event);
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
-      }
-    );
+      this.dataTransfer.upload(formData).subscribe({
+        next: (response: string[]) => {
+          this.fileTypes = response;
+          this.fileUploaded = true;
+          this.errorMessage = '';
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errorMessage = error.error.message;
+        }
+      });
+    }
+  }
+
+  onDownload(type: string) {
+    this.fileName = `file.${type}`;
+    this.dataTransfer.download(type).subscribe(
+      blob => {
+        importedSaveAs(blob, this.fileName);
+      });
   }
 
 
-  onDownloadFile(fileType: string): void {
-    this.dataTransfer.download(fileType).subscribe(
-      event => {
-        console.log(event);
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-      }
-    );
-  }
+
+
 
 
 

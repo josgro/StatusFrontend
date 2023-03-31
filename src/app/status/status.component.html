@@ -1,4 +1,53 @@
 <app-nav></app-nav>
 <div class="container">
-  <p>Status</p>
+  <div class="row justify-content-center">
+    <div class="col-md-4 mt-2">
+      <h4 class="text-center mb-4">Check Course Status</h4>
+      <div *ngIf="!checked">
+        <form #statusForm="ngForm" id="statusForm">
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-control rounded-5 mt-2"
+              placeholder="Email"
+              id="email"
+              name="email"
+              required
+              ngModel
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control rounded-5 mt-2"
+              placeholder="Course Name"
+              id="courseName"
+              name="courseName"
+              required
+              ngModel
+            />
+          </div>
+          <button
+            [disabled]="statusForm.invalid"
+            (click)="onCheckStatus(statusForm)"
+            class="btn btn-primary mt-4 rounded-5 mt-2"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <div class="col-md-4 mt-2">
+        <div *ngIf="checked">
+          <p>{{ email }}</p>
+          <p>{{ status }}</p>
+          <button class="btn btn-primary" (click)="resetStatusForm()">
+            Reset
+          </button>
+        </div>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+      </div>
+    </div>
+  </div>
 </div>

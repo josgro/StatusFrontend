@@ -1,5 +1,35 @@
 <app-nav></app-nav>
 
 <div class="container">
-  <p>files works!</p>
+  <div *ngIf="!fileUploaded">
+    <input
+      type="file"
+      class="file-input"
+      (change)="onFileSelected($event)"
+      #fileUpload
+    />
+
+    <div class="file-upload m-4">
+      {{ fileName || "Upload a file" }}
+
+      <button
+        color="primary"
+        class="btn btn-primary"
+        (click)="fileUpload.click()"
+      >
+        Choose file
+      </button>
+    </div>
+  </div>
+  <div *ngIf="fileUploaded">
+    <p>Choose a type of file to download:</p>
+    <div *ngFor="let type of fileTypes">
+      <button class="m-4 btn btn-primary" (click)="onDownload(type)">
+        Download: {{ type }}
+      </button>
+    </div>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
 </div>
