@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "status-693ea": {
+      "hosting": {
+        "StatusFrontend": [
+          "status-693ea"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "status-693ea"
+  }
+}
