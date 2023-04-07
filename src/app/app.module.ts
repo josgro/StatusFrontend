@@ -7,15 +7,18 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { StatusComponent } from './status/status.component';
 import { FilesComponent } from './files/files.component';
-import { HttpClientModule } from '@angular/common/http';
-import { DataTransferService } from './dataTransfer/data-transfer.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { DataTransferService } from './http/data-transfer.service';
+import { LoginComponent } from './login/login.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     StatusComponent,
-    FilesComponent
+    FilesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,14 @@ import { DataTransferService } from './dataTransfer/data-transfer.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [DataTransferService],
+  providers: [
+    DataTransferService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

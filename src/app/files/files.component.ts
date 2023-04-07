@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { saveAs as importedSaveAs } from 'file-saver';
-import { DataTransferService } from '../dataTransfer/data-transfer.service';
+import { DataTransferService } from '../http/data-transfer.service';
 import { Observable } from 'rxjs/';
 
 @Component({

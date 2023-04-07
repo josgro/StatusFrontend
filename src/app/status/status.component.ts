@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { DataTransferService } from '../dataTransfer/data-transfer.service';
+import { DataTransferService } from '../http/data-transfer.service';
 import { NgForm } from '@angular/forms';
 import { EmailStatus } from '../model/EmailStatus.model';
 import { HttpErrorResponse } from '@angular/common/http';
