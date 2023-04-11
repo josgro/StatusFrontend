@@ -11,6 +11,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DataTransferService } from './http/data-transfer.service';
 import { LoginComponent } from './login/login.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { AuthGuardService } from './login/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     FormsModule
   ],
   providers: [
+    AuthGuardService,
     DataTransferService,
     {
       provide: HTTP_INTERCEPTORS,
