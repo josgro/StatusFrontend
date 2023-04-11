@@ -4,13 +4,32 @@ import { FilesComponent } from './files/files.component';
 import { NavComponent } from './nav/nav.component';
 import { StatusComponent } from './status/status.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './login/auth-guard.service';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'status', component: StatusComponent },
-  { path: 'files', component: FilesComponent },
-  { path: 'nav', component: NavComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'status',
+    component: StatusComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'files',
+    component: FilesComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'nav',
+    component: NavComponent
+  },
+  {
+    path: '',
+    redirectTo: 'status',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

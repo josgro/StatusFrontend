@@ -19,6 +19,10 @@ export class LoginComponent {
   }
 
 
+  public token = localStorage.getItem('token');
+
+
+
   login(loginForm: NgForm) {
     this.auth.removeToken();
     return this.auth.login(loginForm.value).subscribe(

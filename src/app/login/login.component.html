@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-4"></div>
-    <div class="col-4">
+    <div class="col-4" *ngIf="!token">
       <h4 class="text-center mb-4">Login</h4>
       <form #loginForm="ngForm" id="loginForm">
         <div class="form-group">
@@ -35,6 +35,9 @@
           Submit
         </button>
       </form>
+    </div>
+    <div class="col-4" *ngIf="token">
+      <h4 class="mt-4">You are logged in</h4>
     </div>
     <div class="col-4"></div>
   </div>
