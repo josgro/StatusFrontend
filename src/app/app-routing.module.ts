@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FilesComponent } from './files/files.component';
-import { NavComponent } from './nav/nav.component';
 import { StatusComponent } from './status/status.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './login/auth-guard.service';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'status',
@@ -20,10 +24,6 @@ const routes: Routes = [
     path: 'files',
     component: FilesComponent,
     canActivate: [AuthGuardService]
-  },
-  {
-    path: 'nav',
-    component: NavComponent
   },
   {
     path: '',

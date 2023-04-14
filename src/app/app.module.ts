@@ -12,6 +12,7 @@ import { DataTransferService } from './http/data-transfer.service';
 import { LoginComponent } from './login/login.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { AuthGuardService } from './login/auth-guard.service';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AuthGuardService } from './login/auth-guard.service';
     NavComponent,
     StatusComponent,
     FilesComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

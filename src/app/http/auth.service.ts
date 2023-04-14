@@ -1,3 +1,4 @@
+import { RegisterDetails } from './../model/RegisterDetails';
 import { Observable } from 'rxjs/';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,10 +16,15 @@ export class AuthService {
     this.domain = environment.domain;
   }
 
-  login(userDetails: UserDetails): Observable<any> {
-    return this.http.post<any>(`${this.domain}token`, userDetails);
+
+  register(registerDetails: RegisterDetails): Observable<any> {
+    return this.http.post<any>(`${this.domain}auth/register`, registerDetails);
   }
 
+
+  login(userDetails: UserDetails): Observable<any> {
+    return this.http.post<any>(`${this.domain}auth/authenticate`, userDetails);
+  }
 
   getToken() {
     return localStorage.getItem('token');

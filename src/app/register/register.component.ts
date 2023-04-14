@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../http/auth.service';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent {
+export class RegisterComponent {
 
   private domain: string | undefined;
 
@@ -18,18 +18,14 @@ export class LoginComponent {
   }
 
 
-  public token = localStorage.getItem('token');
-
-
-
-  login(loginForm: NgForm) {
+  public register(registerForm: NgForm) {
     this.auth.removeToken();
-    console.log(loginForm.value);
-    return this.auth.login(loginForm.value).subscribe(
+    return this.auth.register(registerForm.value).subscribe(
       (response) => {
         this.auth.setToken(response.token);
         this.router.navigate(['status']);
       });
   }
+
 
 }
